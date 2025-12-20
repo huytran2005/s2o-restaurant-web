@@ -1,0 +1,202 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 20 14% 8%;
+    --foreground: 30 20% 95%;
+
+    --card: 20 12% 12%;
+    --card-foreground: 30 20% 95%;
+
+    --popover: 20 12% 12%;
+    --popover-foreground: 30 20% 95%;
+
+    --primary: 32 95% 55%;
+    --primary-foreground: 20 14% 8%;
+
+    --secondary: 20 10% 18%;
+    --secondary-foreground: 30 20% 90%;
+
+    --muted: 20 10% 20%;
+    --muted-foreground: 30 10% 60%;
+
+    --accent: 32 95% 55%;
+    --accent-foreground: 20 14% 8%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 30 20% 95%;
+
+    --border: 20 10% 22%;
+    --input: 20 10% 22%;
+    --ring: 32 95% 55%;
+
+    --radius: 0.75rem;
+
+    /* Custom KDS Colors */
+    --status-pending: 38 92% 50%;
+    --status-pending-bg: 38 92% 50%;
+    --status-cooking: 142 71% 45%;
+    --status-cooking-bg: 142 71% 45%;
+    --status-smooth: 199 89% 48%;
+    --status-smooth-bg: 199 89% 48%;
+    --status-completed: 215 14% 45%;
+    --status-completed-bg: 215 14% 45%;
+
+    /* Gradients */
+    --gradient-warm: linear-gradient(135deg, hsl(32 95% 55% / 0.15), hsl(20 14% 8% / 0.9));
+    --gradient-card: linear-gradient(180deg, hsl(20 12% 14%), hsl(20 12% 10%));
+    --gradient-glow: radial-gradient(ellipse at center, hsl(32 95% 55% / 0.1), transparent 70%);
+
+    /* Shadows */
+    --shadow-card: 0 4px 24px -4px hsl(0 0% 0% / 0.4);
+    --shadow-glow-pending: 0 0 20px hsl(38 92% 50% / 0.3);
+    --shadow-glow-cooking: 0 0 20px hsl(142 71% 45% / 0.3);
+    --shadow-glow-smooth: 0 0 20px hsl(199 89% 48% / 0.3);
+
+    --sidebar-background: 20 14% 8%;
+    --sidebar-foreground: 30 20% 95%;
+    --sidebar-primary: 32 95% 55%;
+    --sidebar-primary-foreground: 20 14% 8%;
+    --sidebar-accent: 20 10% 18%;
+    --sidebar-accent-foreground: 30 20% 95%;
+    --sidebar-border: 20 10% 22%;
+    --sidebar-ring: 32 95% 55%;
+  }
+
+  .dark {
+    --background: 20 14% 8%;
+    --foreground: 30 20% 95%;
+
+    --card: 20 12% 12%;
+    --card-foreground: 30 20% 95%;
+
+    --popover: 20 12% 12%;
+    --popover-foreground: 30 20% 95%;
+
+    --primary: 32 95% 55%;
+    --primary-foreground: 20 14% 8%;
+
+    --secondary: 20 10% 18%;
+    --secondary-foreground: 30 20% 90%;
+
+    --muted: 20 10% 20%;
+    --muted-foreground: 30 10% 60%;
+
+    --accent: 32 95% 55%;
+    --accent-foreground: 20 14% 8%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 30 20% 95%;
+
+    --border: 20 10% 22%;
+    --input: 20 10% 22%;
+    --ring: 32 95% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+  }
+}
+
+@layer components {
+  .stat-card {
+    @apply relative overflow-hidden rounded-xl p-5 transition-all duration-300;
+    background: var(--gradient-card);
+    box-shadow: var(--shadow-card);
+  }
+
+  .stat-card::before {
+    content: '';
+    @apply absolute inset-0 opacity-0 transition-opacity duration-300;
+    background: var(--gradient-glow);
+  }
+
+  .stat-card:hover::before {
+    @apply opacity-100;
+  }
+
+  .order-card {
+    @apply relative overflow-hidden rounded-2xl transition-all duration-300;
+    background: var(--gradient-card);
+    box-shadow: var(--shadow-card);
+  }
+
+  .status-badge {
+    @apply inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider;
+  }
+
+  .status-pending {
+    @apply bg-[hsl(var(--status-pending)/0.15)] text-[hsl(var(--status-pending))] border border-[hsl(var(--status-pending)/0.3)];
+  }
+
+  .status-cooking {
+    @apply bg-[hsl(var(--status-cooking)/0.15)] text-[hsl(var(--status-cooking))] border border-[hsl(var(--status-cooking)/0.3)];
+  }
+
+  .status-smooth {
+    @apply bg-[hsl(var(--status-smooth)/0.15)] text-[hsl(var(--status-smooth))] border border-[hsl(var(--status-smooth)/0.3)];
+  }
+
+  .status-completed {
+    @apply bg-[hsl(var(--status-completed)/0.15)] text-[hsl(var(--status-completed))] border border-[hsl(var(--status-completed)/0.3)];
+  }
+
+  .progress-bar {
+    @apply h-1.5 rounded-full overflow-hidden bg-muted;
+  }
+
+  .progress-fill {
+    @apply h-full rounded-full transition-all duration-500 ease-out;
+  }
+
+  .glow-pending {
+    box-shadow: var(--shadow-glow-pending);
+  }
+
+  .glow-cooking {
+    box-shadow: var(--shadow-glow-cooking);
+  }
+
+  .glow-smooth {
+    box-shadow: var(--shadow-glow-smooth);
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-slide-up {
+    animation: slide-up 0.4s ease-out forwards;
+  }
+}
